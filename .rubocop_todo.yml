@@ -1,0 +1,7 @@
+
+Layout/LineLength:
+  Max: 154
+
+Lint/EmptyClass:
+  Exclude:
+    - 'app/services/service_base.rb'
