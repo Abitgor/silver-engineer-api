@@ -22,6 +22,10 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/registrations_controller.rb
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
