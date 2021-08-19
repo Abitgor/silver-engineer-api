@@ -16,10 +16,14 @@ ActiveRecord::Schema.define(version: 2021_08_17_130853) do
   enable_extension "plpgsql"
 
   create_table "allowlisted_jwts", force: :cascade do |t|
-    t.string "jti"
-    t.string "aud"
-    t.datetime "exp"
     t.bigint "user_id", null: false
+    t.string "jti", null: false
+    t.string "aud", null: false
+    t.datetime "exp", null: false
+    t.string "remote_ip"
+    t.string "os_data"
+    t.string "browser_data"
+    t.string "device_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["jti"], name: "index_allowlisted_jwts_on_jti"

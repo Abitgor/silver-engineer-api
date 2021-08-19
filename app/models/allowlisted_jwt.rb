@@ -2,13 +2,17 @@
 #
 # Table name: allowlisted_jwts
 #
-#  id         :bigint           not null, primary key
-#  aud        :string
-#  exp        :datetime
-#  jti        :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id           :bigint           not null, primary key
+#  aud          :string           not null
+#  browser_data :string
+#  device_data  :string
+#  exp          :datetime         not null
+#  jti          :string           not null
+#  os_data      :string
+#  remote_ip    :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  user_id      :bigint           not null
 #
 # Indexes
 #
