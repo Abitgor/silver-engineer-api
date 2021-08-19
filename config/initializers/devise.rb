@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'c212bedf4382ed62eb223bf14a317eefa06c601216cda350b913ce22d0b6251d8cc7d87b72d7a71a21e921ae1b4b4ae352be0da2d12fb59609a2a9c1c6686b28'
+  # config.secret_key = '298cf921ab15f2f35d7123aa766d9971f23b0ed88845c030362d1354e3ce142bda07355cafc412978bd97e1c8db5505d303e2275e683a8364cb4ba7bdad254d0'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,13 +126,13 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '3e1bd4ae6957e5c62668b6c147160a1be982ed420233a095bae5df07e7bd26ebfa77a72ed98bcf11e2f1194d9e0b941f380c2c830b75699c5bab596c7207c2a0'
+  # config.pepper = 'bb36a8caae58940fbe41d3e7b49f0e09d544dbb8ffb4834cbad2b5ffc2d58ab675c60a383841555207e2e5468f782a9619b156860b9635082dcc870137f0dad3'
 
   # Send a notification to the original email when the user's email is changed.
-  # config.send_email_changed_notification = false
+  config.send_email_changed_notification = true
 
   # Send a notification email when the user's password is changed.
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -281,6 +281,9 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
+  config.warden do |manager|
+    manager.failure_app = DeviseCustomFailure
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
@@ -308,4 +311,17 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  config.jwt do |jwt|
+    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+    jwt.dispatch_requests = [
+      ['POST', %r{^/signin$}],
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/signout$}]
+    ]
+    jwt.expiration_time = 14.days.to_i
+    # Use default aud_header
+    jwt.aud_header = 'JWT_AUD'
+  end
 end

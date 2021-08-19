@@ -22,6 +22,10 @@ AllCops:
 Style/Documentation:
   Enabled: false
 
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - app/controllers/registrations_controller.rb
+
 Style/FrozenStringLiteralComment:
   Enabled: false
 
@@ -52,6 +56,24 @@ Metrics/BlockLength:
     - spec/**/*
     - config/routes.rb
     - lib/tasks/auto_anotate_models.rake
+    -
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/passwords_controller.rb
+    - app/controllers/sessions_controller.rb
+    - app/models/concerns/users/allowlist.rb
+    - lib/devise_custom_failure.rb
+Metrics/MethodLength:
+  Exclude:
+    - app/controllers/passwords_controller.rb
+    - app/controllers/sessions_controller.rb
+    - app/models/concerns/users/allowlist.rb
+    - lib/devise_custom_failure.rb
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - app/controllers/sessions_controller.rb
+    - app/models/concerns/users/allowlist.rb
 
 RSpec/ExampleLength:
   Max: 20
@@ -61,3 +83,9 @@ RSpec/MultipleExpectations:
 
 Rails/HasManyOrHasOneDependent:
   Enabled: false
+
+RSpec/InstanceVariable:
+  Exclude:
+    - spec/controllers/registrations_controller_spec.rb
+    - spec/controllers/sessions_controller_spec.rb
+    - spec/controllers/sessions_controller_spec.rb
