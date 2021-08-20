@@ -10,7 +10,8 @@ RSpec.describe RegistrationsController, type: :controller do
       description: 'I am Ruby on Rails Team lead u know?',
       email: 'poasd@test.com',
       password: '12345678',
-      password_confirmation: '12345678'
+      password_confirmation: '12345678',
+      type: 'Freelancer'
     }
   end
 

@@ -18,6 +18,7 @@
 #  reset_password_token   :string
 #  sign_in_count          :integer          default(0), not null
 #  title                  :string
+#  type                   :string           not null
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -32,5 +33,9 @@ FactoryBot.define do
   factory :user do
     email { Faker::Internet.email }
     password { Faker::Internet.password }
+    type { 'Customer' }
+    trait :freelancer do
+      type { 'Freelancer' }
+    end
   end
 end

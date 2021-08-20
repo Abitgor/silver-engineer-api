@@ -41,7 +41,6 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 2.3'
 
   gem 'fasterer', '~> 0.9.0'
-  gem 'groupify'
   gem 'overcommit', '~> 0.57.0'
   gem 'rswag-specs'
 
