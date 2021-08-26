@@ -6,4 +6,9 @@ Rails.application.routes.draw do
                registrations: 'registrations',
                sessions: 'sessions',
              }
+  namespace :api do
+    namespace :v1 do
+      resources :jobs
+    end
+  end
 end
