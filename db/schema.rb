@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_131651) do
     t.string "title"
     t.text "description"
     t.integer "status"
-    t.string "type"
+    t.string "job_type"
     t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

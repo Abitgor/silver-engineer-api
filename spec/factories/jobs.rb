@@ -20,8 +20,12 @@
 #
 #  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
-class Job < ApplicationRecord
-  belongs_to :customer, foreign_key: 'user_id'
-
-  enum status: { published: 0, unpublished: 1, not_set: 2 }
+FactoryBot.define do
+  factory :job do
+    title { Faker::Job.title }
+    description { Faker::Job.position }
+    job_type { Faker::Job.employment_type }
+    customer { create(:customer) }
+    status { :published }
+  end
 end

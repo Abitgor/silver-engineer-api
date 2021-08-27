@@ -29,6 +29,9 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class Customer < User
-  has_many :jobs, foreign_key: 'user_id'
+FactoryBot.define do
+  factory :customer do
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+  end
 end
