@@ -66,7 +66,7 @@ RSpec.describe 'Job requests', type: :request do
 
     it 'response is successful' do
       delete "/api/v1/jobs/#{job.id}", headers: auth_header, as: :json
-      expect(response.status).to eq 204
+      expect(Job.count).to eq 0
     end
   end
 end

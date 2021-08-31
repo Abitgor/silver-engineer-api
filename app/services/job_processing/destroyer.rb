@@ -12,6 +12,6 @@ class JobProcessing::Destroyer < ServiceBase
   end
 
   def delete_job
-    @job.delete if @job.present?
+    @job.delete
   end
 end

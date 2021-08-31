@@ -22,6 +22,7 @@ gem 'active_model_serializers', '~> 0.10.4'
 gem 'cancancan', '~> 3.2.1'
 gem 'devise', '~> 4.2'
 gem 'devise-jwt', '~>0.8.1'
+gem 'kaminari'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

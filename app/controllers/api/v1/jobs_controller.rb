@@ -1,22 +1,29 @@
 class Api::V1::JobsController < Api::V1::ApplicationController
+  include Api::PerPage
+
   def index
-    Job.all
+    jobs = Job.page(params[:page]).per(per_page)
+    render json: build_json(jobs)
   end
 
   def show
-    JobProcessing::Finder.find_by(id: params[:id])
+    job = JobProcessing::Finder.find_by(id: params[:id])
+    render json: job
   end
 
   def create
-    JobProcessing::Creator.create!(job_permitted_params, current_user)
+    job = JobProcessing::Creator.create!(job_permitted_params, current_user)
+    render json: job
   end
 
   def update
-    JobProcessing::Updater.update!(job_permitted_params, params[:id])
+    job = JobProcessing::Updater.update!(job_permitted_params, params[:id])
+    render json: job
   end
 
   def destroy
     JobProcessing::Destroyer.delete!(params[:id])
+    render json: { id: params[:id], message: 'Successfully delete' }
   end
 
   private

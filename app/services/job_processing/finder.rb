@@ -12,6 +12,9 @@ class JobProcessing::Finder < ServiceBase
   end
 
   def find_job
-    Job.find_by(@job_params)
+    job = Job.find_by(@job_params)
+    raise ActiveRecord::RecordNotFound unless job.presence
+
+    job
   end
 end

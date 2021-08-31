@@ -13,6 +13,6 @@ class JobProcessing::Updater < ServiceBase
   end
 
   def update_job
-    @job.update!(@job_params) if @job.present?
+    @job.update!(@job_params)
   end
 end

@@ -29,6 +29,6 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-class Customer < User
-  has_many :jobs, foreign_key: 'user_id', dependent: :destroy
+class CustomerSerializer < ActiveModel::Serializer
+  attributes :id, :first_name, :last_name, :email, :description, :type, :title
 end
