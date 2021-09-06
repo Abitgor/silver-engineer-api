@@ -32,7 +32,6 @@ RSpec.describe 'Job requests', type: :request do
   describe 'post #create' do
     let(:valid_params) do
       {
-        user: current_user,
         title: 'RoR developer',
         status: :unpublished
       }
