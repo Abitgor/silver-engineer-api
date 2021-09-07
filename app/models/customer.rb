@@ -31,4 +31,6 @@
 #
 class Customer < User
   has_many :jobs, foreign_key: 'user_id', dependent: :destroy
+  has_many :contracts, foreign_key: 'author_id', dependent: :destroy
+  has_many :work_histories, foreign_key: 'author_id', dependent: :destroy
 end

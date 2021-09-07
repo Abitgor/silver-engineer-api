@@ -30,4 +30,6 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class Freelancer < User
+  has_many :contracts, foreign_key: 'signer_id', dependent: :destroy
+  has_many :work_histories, foreign_key: 'signer_id', dependent: :destroy
 end
