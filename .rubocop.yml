@@ -19,6 +19,15 @@ AllCops:
     - lib/tasks/auto_annotate_models.rake
     - config/**/*
 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/FilePath:
+  Exclude:
+    - spec/services/wotk_history_processing/creator_spec.rb
+    - spec/services/wotk_history_processing/finder_spec.rb
+    - spec/services/wotk_history_processing/updater_spec.rb
+
 Style/Documentation:
   Enabled: false
 

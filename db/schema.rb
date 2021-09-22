@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_131651) do
+ActiveRecord::Schema.define(version: 2021_09_07_100559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(version: 2021_08_26_131651) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["jti"], name: "index_allowlisted_jwts_on_jti"
     t.index ["user_id"], name: "index_allowlisted_jwts_on_user_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "signer_id"
+    t.bigint "job_id", null: false
+    t.integer "rate", default: 0
+    t.integer "hours", default: 0
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_contracts_on_author_id"
+    t.index ["job_id"], name: "index_contracts_on_job_id"
+    t.index ["signer_id"], name: "index_contracts_on_signer_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -67,6 +81,31 @@ ActiveRecord::Schema.define(version: 2021_08_26_131651) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "work_histories", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "signer_id"
+    t.bigint "contract_id", null: false
+    t.integer "rate"
+    t.integer "hours"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "title"
+    t.text "description"
+    t.string "job_type"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_work_histories_on_author_id"
+    t.index ["contract_id"], name: "index_work_histories_on_contract_id"
+    t.index ["signer_id"], name: "index_work_histories_on_signer_id"
+  end
+
   add_foreign_key "allowlisted_jwts", "users", on_delete: :cascade
+  add_foreign_key "contracts", "jobs", on_delete: :cascade
+  add_foreign_key "contracts", "users", column: "author_id", on_delete: :cascade
+  add_foreign_key "contracts", "users", column: "signer_id", on_delete: :cascade
   add_foreign_key "jobs", "users", on_delete: :cascade
+  add_foreign_key "work_histories", "contracts", on_delete: :cascade
+  add_foreign_key "work_histories", "users", column: "author_id", on_delete: :cascade
+  add_foreign_key "work_histories", "users", column: "signer_id", on_delete: :cascade
 end
