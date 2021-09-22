@@ -29,12 +29,15 @@
 #  fk_rails_...  (contract_id => contracts.id) ON DELETE => cascade
 #  fk_rails_...  (signer_id => users.id) ON DELETE => cascade
 #
-class WorkHistory < ApplicationRecord
-  belongs_to :customer, foreign_key: 'author_id'
-  belongs_to :freelancer, foreign_key: 'signer_id'
-  belongs_to :contract
-
-  def end_date
-    end_date || 'present'
+FactoryBot.define do
+  factory :work_history do
+    title { Faker::Job.title }
+    description { Faker::Job.position }
+    job_type { Faker::Job.employment_type }
+    customer { create(:customer) }
+    freelancer { create(:freelancer) }
+    contract { create(:contract) }
+    rate { 20 }
+    hours { 0 }
   end
 end

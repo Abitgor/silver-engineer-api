@@ -13,7 +13,7 @@ class ContractProcessing::Creator < ServiceBase
 
   def create_contract
     Contract.transaction do
-      @author.contracts.create!(@contract_params)
+      @contract = @author.contracts.create!(@contract_params)
       create_work_history
     end
     Contract.find_by(@contract_params)
@@ -33,7 +33,8 @@ class ContractProcessing::Creator < ServiceBase
       job_type: job.job_type,
       start_date: Time.zone.today,
       author_id: @author.id,
-      signer_id: @contract_params[:signer_id]
+      signer_id: @contract_params[:signer_id],
+      contract_id: @contract.id
     }
   end
 end

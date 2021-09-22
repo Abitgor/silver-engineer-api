@@ -24,10 +24,13 @@
 #  fk_rails_...  (job_id => jobs.id) ON DELETE => cascade
 #  fk_rails_...  (signer_id => users.id) ON DELETE => cascade
 #
-class Contract < ApplicationRecord
-  belongs_to :customer, foreign_key: 'author_id'
-  belongs_to :freelancer, foreign_key: 'signer_id'
-  belongs_to :job
-  has_one :work_history
-  enum status: { active: 0, closed: 1 }
+FactoryBot.define do
+  factory :contract do
+    customer { create(:customer) }
+    freelancer { create(:freelancer) }
+    job { create(:job) }
+    status { :active }
+    rate { 20 }
+    hours { 0 }
+  end
 end

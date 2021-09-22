@@ -34,9 +34,9 @@ ActiveRecord::Schema.define(version: 2021_09_07_100559) do
     t.bigint "author_id", null: false
     t.bigint "signer_id"
     t.bigint "job_id", null: false
-    t.integer "rate"
-    t.integer "hours"
-    t.integer "status"
+    t.integer "rate", default: 0
+    t.integer "hours", default: 0
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_contracts_on_author_id"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2021_09_07_100559) do
   create_table "work_histories", force: :cascade do |t|
     t.bigint "author_id", null: false
     t.bigint "signer_id"
-    t.bigint "contracts_id", null: false
+    t.bigint "contract_id", null: false
     t.integer "rate"
     t.integer "hours"
     t.datetime "start_date"
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2021_09_07_100559) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_work_histories_on_author_id"
-    t.index ["contracts_id"], name: "index_work_histories_on_contracts_id"
+    t.index ["contract_id"], name: "index_work_histories_on_contract_id"
     t.index ["signer_id"], name: "index_work_histories_on_signer_id"
   end
 
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2021_09_07_100559) do
   add_foreign_key "contracts", "users", column: "author_id", on_delete: :cascade
   add_foreign_key "contracts", "users", column: "signer_id", on_delete: :cascade
   add_foreign_key "jobs", "users", on_delete: :cascade
-  add_foreign_key "work_histories", "contracts", column: "contracts_id", on_delete: :cascade
+  add_foreign_key "work_histories", "contracts", on_delete: :cascade
   add_foreign_key "work_histories", "users", column: "author_id", on_delete: :cascade
   add_foreign_key "work_histories", "users", column: "signer_id", on_delete: :cascade
 end
